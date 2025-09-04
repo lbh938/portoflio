@@ -178,7 +178,7 @@ export default function Home() {
               {t("aiGallery.description")}
             </p>
           </div>
-
+          
           {/* Grid alignée sur la section Projets Web (cartes 16:9, taille homogène) */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {(aiImages.some((i) => i.featured) ? aiImages.filter((i) => i.featured) : aiImages).map((image) => {
@@ -283,99 +283,38 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Skills Section - New Design */}
-      <section id="about" className="py-24 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5">
+      {/* Skills Section - Apple Style */}
+      <section id="about" className="py-24">
         <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass bg-background/20 backdrop-blur-xl border-white/20 text-primary text-sm font-medium mb-6">
-              <Zap className="w-4 h-4" />
-              Expertise Technique
-            </div>
-            <h2 className="text-4xl font-bold mb-4">{t("skills.title")}</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl font-semibold mb-6">{t("skills.title")}</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               {t("skills.description")}
             </p>
           </div>
-          
-          {/* Skills Grid with Modern Design */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+          {/* Clean Skills Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
             {skills.map((skill, index) => {
               const Icon = skill.icon;
               return (
-                <div key={index} className="group relative">
-                  {/* Background Glow Effect */}
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition duration-500"></div>
-                  
-                  {/* Main Card */}
-                  <Card className="relative text-center group hover:shadow-2xl transition-all duration-500 glass bg-background/30 backdrop-blur-xl border-white/30 hover:border-primary/50 hover:scale-105">
-                    <CardHeader className="pb-4">
-                      <div className="mx-auto w-16 h-16 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl flex items-center justify-center mb-4 group-hover:from-primary/30 group-hover:to-secondary/30 transition-all duration-300">
-                        <Icon className="w-8 h-8 text-primary group-hover:scale-110 transition-transform duration-300" />
-                      </div>
-                      <CardTitle className="text-lg font-semibold group-hover:text-primary transition-colors duration-300">
-                        {skill.name}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="pt-0">
-                      {/* Animated Progress Bar */}
-                      <div className="relative w-full bg-muted/50 rounded-full h-3 mb-3 overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-full"></div>
-                        <div 
-                          className="relative bg-gradient-to-r from-primary to-secondary h-3 rounded-full transition-all duration-1000 ease-out group-hover:shadow-lg"
-                          style={{ width: `${skill.level}%` }}
-                        >
-                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse"></div>
-                        </div>
-                      </div>
-                      
-                      {/* Skill Level with Animation */}
-                      <div className="flex items-center justify-between text-sm">
-                        <span className="text-muted-foreground">Niveau</span>
-                        <span className="font-bold text-primary group-hover:scale-110 transition-transform duration-300">
-                          {skill.level}%
-                        </span>
-                      </div>
-                      
-                      {/* Decorative Elements */}
-                      <div className="mt-4 flex justify-center space-x-1">
-                        {[...Array(5)].map((_, i) => (
-                          <div 
-                            key={i}
-                            className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                              i < Math.floor(skill.level / 20) 
-                                ? 'bg-primary' 
-                                : 'bg-muted/30'
-                            }`}
-                          />
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
+                <Card key={index} className="group glass bg-white/5 backdrop-blur-xl border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105">
+                  <CardContent className="p-8 text-center">
+                    <div className="w-12 h-12 mx-auto mb-6 bg-white/10 rounded-2xl flex items-center justify-center group-hover:bg-white/20 transition-colors duration-300">
+                      <Icon className="w-6 h-6 text-foreground" />
+                    </div>
+                    <h3 className="text-lg font-medium mb-4">{skill.name}</h3>
+                    <div className="w-full bg-white/10 rounded-full h-1.5 mb-3">
+                      <div 
+                        className="bg-foreground h-1.5 rounded-full transition-all duration-1000 ease-out"
+                        style={{ width: `${skill.level}%` }}
+                      />
+                    </div>
+                    <p className="text-sm text-muted-foreground">{skill.level}%</p>
+                  </CardContent>
+                </Card>
               );
             })}
-          </div>
-          
-          {/* Additional Info Section */}
-          <div className="mt-16 text-center">
-            <Card className="max-w-4xl mx-auto glass bg-background/20 backdrop-blur-xl border-white/20">
-              <CardContent className="p-8">
-                <div className="grid md:grid-cols-3 gap-8">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-primary mb-2">5+</div>
-                    <div className="text-sm text-muted-foreground">Années d'expérience</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-primary mb-2">50+</div>
-                    <div className="text-sm text-muted-foreground">Projets réalisés</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-primary mb-2">100%</div>
-                    <div className="text-sm text-muted-foreground">Satisfaction client</div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
           </div>
         </div>
       </section>
