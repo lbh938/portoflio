@@ -28,7 +28,15 @@ import {
 export default function Home() {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showAllImages, setShowAllImages] = useState(false);
   const { t, language, changeLanguage } = useTranslations();
+
+  // Textes avec apostrophes échappées pour éviter les erreurs ESLint
+  const heroTitle = language === 'fr' ? "Créateur d'expériences numériques innovantes" : t("hero.title");
+  const heroDescription = language === 'fr' ? "Spécialisé dans la génération d'images IA avec des prompts avancés et le développement d'applications web modernes. Je transforme vos idées en réalité numérique." : t("hero.description");
+  const heroCta2 = language === 'fr' ? "Découvrir l'IA" : t("hero.cta2");
+  const contactTitle = language === 'en' ? "Let's work together" : t("contact.title");
+  const contactDescription = language === 'en' ? "Let's discuss your project and how I can help you" : t("contact.contactDescription");
 
   const fallbackAiImages: Array<{id:number; image:string; prompt:string; title:string; model:string; featured:boolean}> = [];
 
@@ -105,7 +113,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-background to-muted/20">
+    <main className="min-h-screen bg-gradient-to-b from-background to-muted/20 smooth-scroll">
       {/* Navigation */}
       <nav className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto px-6 h-16 flex items-center justify-between">
@@ -146,11 +154,11 @@ export default function Home() {
             </div>
             
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6">
-              {t("hero.title")}
+              {heroTitle}
             </h1>
             
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              {t("hero.description")}
+              {heroDescription}
             </p>
 
             {/* Mimojie presenter removed until provided via admin */}
@@ -181,7 +189,10 @@ export default function Home() {
           
           {/* Grid alignée sur la section Projets Web (cartes 16:9, taille homogène) */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {(aiImages.some((i) => i.featured) ? aiImages.filter((i) => i.featured) : aiImages).map((image) => {
+            {(() => {
+              const featuredImages = aiImages.some((i) => i.featured) ? aiImages.filter((i) => i.featured) : aiImages;
+              const imagesToShow = showAllImages ? featuredImages : featuredImages.slice(0, 6);
+              return imagesToShow.map((image) => {
               const safeSrc = image.image && String(image.image).trim().length > 0 ? String(image.image) : null;
               return (
                 <Card
@@ -215,8 +226,28 @@ export default function Home() {
                   </CardHeader>
                 </Card>
               );
-            })}
+            });
+            })()}
           </div>
+          
+          {/* Bouton Voir plus/moins */}
+          {(() => {
+            const featuredImages = aiImages.some((i) => i.featured) ? aiImages.filter((i) => i.featured) : aiImages;
+            if (featuredImages.length > 6) {
+              return (
+                <div className="text-center mt-12">
+                  <Button 
+                    onClick={() => setShowAllImages(!showAllImages)}
+                    variant="outline"
+                    className="glass bg-background/20 backdrop-blur-xl border-white/20 hover:bg-white/30"
+                  >
+                    {showAllImages ? t("aiGallery.seeLess") : t("aiGallery.seeMore")}
+                  </Button>
+                </div>
+              );
+            }
+            return null;
+          })()}
         </div>
       </section>
 

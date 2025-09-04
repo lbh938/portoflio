@@ -8,10 +8,10 @@ export const translations = {
     },
     hero: {
       badge: "Expert en IA & Développement Web",
-      title: "Créateur d&apos;expériences numériques innovantes",
-      description: "Spécialisé dans la génération d&apos;images IA avec des prompts avancés et le développement d&apos;applications web modernes. Je transforme vos idées en réalité numérique.",
+      title: "Créateur d'expériences numériques innovantes",
+      description: "Spécialisé dans la génération d'images IA avec des prompts avancés et le développement d'applications web modernes. Je transforme vos idées en réalité numérique.",
       cta1: "Voir mes projets",
-      cta2: "Découvrir l&apos;IA"
+      cta2: "Découvrir l'IA"
     },
     skills: {
       title: "Expertise Technique",
@@ -28,7 +28,9 @@ export const translations = {
       prompt: "Prompt utilisé",
       copy: "Copier",
       copied: "Copié !",
-      generated: "Généré avec"
+      generated: "Généré avec",
+      seeMore: "Voir plus",
+      seeLess: "Voir moins"
     },
     contact: {
       title: "Travaillons ensemble",
@@ -73,13 +75,15 @@ export const translations = {
       prompt: "Prompt used",
       copy: "Copy",
       copied: "Copied!",
-      generated: "Generated with"
+      generated: "Generated with",
+      seeMore: "See more",
+      seeLess: "See less"
     },
     contact: {
-      title: "Let&apos;s work together",
+      title: "Let's work together",
       description: "Ready to bring your next project to life? Contact me to discuss your needs.",
       contactTitle: "Contact me",
-      contactDescription: "Let&apos;s discuss your project and how I can help you",
+      contactDescription: "Let's discuss your project and how I can help you",
       startProject: "Start a project"
     },
     footer: {
@@ -118,7 +122,9 @@ export const translations = {
       prompt: "Prompt utilizado",
       copy: "Copiar",
       copied: "¡Copiado!",
-      generated: "Generado con"
+      generated: "Generado con",
+      seeMore: "Ver más",
+      seeLess: "Ver menos"
     },
     contact: {
       title: "Trabajemos juntos",
@@ -163,7 +169,9 @@ export const translations = {
       prompt: "Verwendeter Prompt",
       copy: "Kopieren",
       copied: "Kopiert!",
-      generated: "Generiert mit"
+      generated: "Generiert mit",
+      seeMore: "Mehr anzeigen",
+      seeLess: "Weniger anzeigen"
     },
     contact: {
       title: "Lassen Sie uns zusammenarbeiten",

@@ -62,6 +62,10 @@
   * {
     @apply border-border;
   }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 4rem; /* Offset pour la navbar sticky */
+  }
   body {
     @apply bg-background text-foreground;
   }
@@ -87,5 +91,10 @@
     background-size: 24px 24px;
     mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%);
     -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%);
+  }
+
+  .smooth-scroll {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
   }
 }
