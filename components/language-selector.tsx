@@ -8,23 +8,18 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Globe, Check } from "lucide-react";
+import { Language } from "@/lib/translations";
 
 const languages = [
-  { code: 'fr', name: 'Français', flag: '🇫🇷' },
-  { code: 'en', name: 'English', flag: '🇺🇸' },
-  { code: 'es', name: 'Español', flag: '🇪🇸' },
-  { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
-  { code: 'it', name: 'Italiano', flag: '🇮🇹' },
-  { code: 'pt', name: 'Português', flag: '🇵🇹' },
-  { code: 'ja', name: '日本語', flag: '🇯🇵' },
-  { code: 'ko', name: '한국어', flag: '🇰🇷' },
-  { code: 'zh', name: '中文', flag: '🇨🇳' },
-  { code: 'ar', name: 'العربية', flag: '🇸🇦' },
+  { code: 'fr' as Language, name: 'Français', flag: '🇫🇷' },
+  { code: 'en' as Language, name: 'English', flag: '🇺🇸' },
+  { code: 'es' as Language, name: 'Español', flag: '🇪🇸' },
+  { code: 'de' as Language, name: 'Deutsch', flag: '🇩🇪' },
 ];
 
 interface LanguageSelectorProps {
-  currentLanguage: string;
-  onLanguageChange: (language: string) => void;
+  currentLanguage: Language;
+  onLanguageChange: (language: Language) => void;
 }
 
 export function LanguageSelector({ currentLanguage, onLanguageChange }: LanguageSelectorProps) {

@@ -16,7 +16,7 @@ async function getData() {
   const supabase = await createClient();
   const { data: images } = await supabase
     .from("ai_images")
-    .select("id,title,image_url,prompt,model,created_at")
+    .select("id,title,image_url,prompt,model,featured,created_at")
     .order("created_at", { ascending: false })
     .limit(12);
   const { data: projects } = await supabase
