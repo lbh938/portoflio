@@ -30,7 +30,7 @@ export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { t, language, changeLanguage } = useTranslations();
 
-  const fallbackAiImages: Array<{id:number; image:string; prompt:string; title:string; model:string}> = [];
+  const fallbackAiImages: Array<{id:number; image:string; prompt:string; title:string; model:string; featured:boolean}> = [];
 
   const fallbackWebProjects: Array<{id:number; title:string; description:string; image:string; technologies:string[]; liveUrl:string; githubUrl:string; featured:boolean}> = [];
 
