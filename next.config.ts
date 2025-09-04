@@ -11,6 +11,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "ideal-octo-system.vercel.app",
       },
+      {
+        protocol: "https",
+        hostname: "uvjhykyaalklmrdvlbbo.supabase.co",
+      },
     ],
   },
 };
