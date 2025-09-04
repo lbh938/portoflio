@@ -112,9 +112,9 @@ export default function Home() {
           <div className="flex items-center space-x-8">
             <h1 className="text-xl font-semibold">Portfolio</h1>
             <div className="hidden md:flex items-center space-x-6">
-              <a href="#about" className="text-sm hover:text-primary transition-colors">{t("nav.about")}</a>
-              <a href="#projects" className="text-sm hover:text-primary transition-colors">{t("nav.projects")}</a>
               <a href="#ai-gallery" className="text-sm hover:text-primary transition-colors">{t("nav.aiGallery")}</a>
+              <a href="#projects" className="text-sm hover:text-primary transition-colors">{t("nav.projects")}</a>
+              <a href="#about" className="text-sm hover:text-primary transition-colors">{t("nav.about")}</a>
               <a href="#contact" className="text-sm hover:text-primary transition-colors">{t("nav.contact")}</a>
             </div>
           </div>
@@ -169,36 +169,50 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Skills Section */}
-      <section id="about" className="py-24 bg-muted/30">
+      {/* AI Gallery Section */}
+      <section id="ai-gallery" className="py-24 bg-muted/30">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">{t("skills.title")}</h2>
+            <h2 className="text-4xl font-bold mb-4">{t("aiGallery.title")}</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              {t("skills.description")}
+              {t("aiGallery.description")}
             </p>
           </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {skills.map((skill, index) => {
-              const Icon = skill.icon;
+
+          {/* Grid alignée sur la section Projets Web (cartes 16:9, taille homogène) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {(aiImages.some((i) => i.featured) ? aiImages.filter((i) => i.featured) : aiImages).map((image) => {
+              const safeSrc = image.image && String(image.image).trim().length > 0 ? String(image.image) : null;
               return (
-                <Card key={index} className="text-center group hover:shadow-lg transition-all duration-300 glass bg-background/20 backdrop-blur-xl border-white/20">
-                  <CardHeader>
-                    <div className="mx-auto w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                      <Icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <CardTitle className="text-lg">{skill.name}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="w-full bg-muted rounded-full h-2 mb-2">
-                      <div 
-                        className="bg-primary h-2 rounded-full transition-all duration-1000 ease-out"
-                        style={{ width: `${skill.level}%` }}
+                <Card
+                  key={image.id}
+                  className="group overflow-hidden hover:shadow-xl transition-all duration-300 glass bg-background/20 backdrop-blur-xl border-white/20"
+                  onClick={() => {
+                    setSelectedImage(image.id);
+                    setIsModalOpen(true);
+                  }}
+                >
+                  <div className="relative aspect-video overflow-hidden rounded-md border border-white/10 bg-white/5">
+                    {safeSrc ? (
+                      <Image
+                        src={safeSrc}
+                        alt={image.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
+                    ) : (
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/30" />
+                    )}
+                  </div>
+                  <CardHeader className="p-4">
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <CardTitle className="text-base mb-1 truncate">{image.title}</CardTitle>
+                        <CardDescription className="text-xs text-muted-foreground">{image.model}</CardDescription>
+                      </div>
                     </div>
-                    <p className="text-sm text-muted-foreground">{skill.level}%</p>
-                  </CardContent>
+                  </CardHeader>
                 </Card>
               );
             })}
@@ -269,53 +283,99 @@ export default function Home() {
         </div>
       </section>
 
-      {/* AI Gallery Section */}
-      <section id="ai-gallery" className="py-24 bg-muted/30">
+      {/* Skills Section - New Design */}
+      <section id="about" className="py-24 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">{t("aiGallery.title")}</h2>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass bg-background/20 backdrop-blur-xl border-white/20 text-primary text-sm font-medium mb-6">
+              <Zap className="w-4 h-4" />
+              Expertise Technique
+            </div>
+            <h2 className="text-4xl font-bold mb-4">{t("skills.title")}</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              {t("aiGallery.description")}
+              {t("skills.description")}
             </p>
           </div>
-
-          {/* Grid alignée sur la section Projets Web (cartes 16:9, taille homogène) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {(aiImages.some((i) => i.featured) ? aiImages.filter((i) => i.featured) : aiImages).map((image) => {
-              const safeSrc = image.image && String(image.image).trim().length > 0 ? String(image.image) : null;
+          
+          {/* Skills Grid with Modern Design */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {skills.map((skill, index) => {
+              const Icon = skill.icon;
               return (
-                <Card
-                  key={image.id}
-                  className="group overflow-hidden hover:shadow-xl transition-all duration-300 glass bg-background/20 backdrop-blur-xl border-white/20"
-                  onClick={() => {
-                    setSelectedImage(image.id);
-                    setIsModalOpen(true);
-                  }}
-                >
-                  <div className="relative aspect-video overflow-hidden rounded-md border border-white/10 bg-white/5">
-                    {safeSrc ? (
-                      <Image
-                        src={safeSrc}
-                        alt={image.title}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      />
-                    ) : (
-                      <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/30" />
-                    )}
-                  </div>
-                  <CardHeader className="p-4">
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <CardTitle className="text-base mb-1 truncate">{image.title}</CardTitle>
-                        <CardDescription className="text-xs text-muted-foreground">{image.model}</CardDescription>
+                <div key={index} className="group relative">
+                  {/* Background Glow Effect */}
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                  
+                  {/* Main Card */}
+                  <Card className="relative text-center group hover:shadow-2xl transition-all duration-500 glass bg-background/30 backdrop-blur-xl border-white/30 hover:border-primary/50 hover:scale-105">
+                    <CardHeader className="pb-4">
+                      <div className="mx-auto w-16 h-16 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl flex items-center justify-center mb-4 group-hover:from-primary/30 group-hover:to-secondary/30 transition-all duration-300">
+                        <Icon className="w-8 h-8 text-primary group-hover:scale-110 transition-transform duration-300" />
                       </div>
-                    </div>
-                  </CardHeader>
-                </Card>
+                      <CardTitle className="text-lg font-semibold group-hover:text-primary transition-colors duration-300">
+                        {skill.name}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      {/* Animated Progress Bar */}
+                      <div className="relative w-full bg-muted/50 rounded-full h-3 mb-3 overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-full"></div>
+                        <div 
+                          className="relative bg-gradient-to-r from-primary to-secondary h-3 rounded-full transition-all duration-1000 ease-out group-hover:shadow-lg"
+                          style={{ width: `${skill.level}%` }}
+                        >
+                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse"></div>
+                        </div>
+                      </div>
+                      
+                      {/* Skill Level with Animation */}
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-muted-foreground">Niveau</span>
+                        <span className="font-bold text-primary group-hover:scale-110 transition-transform duration-300">
+                          {skill.level}%
+                        </span>
+                      </div>
+                      
+                      {/* Decorative Elements */}
+                      <div className="mt-4 flex justify-center space-x-1">
+                        {[...Array(5)].map((_, i) => (
+                          <div 
+                            key={i}
+                            className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+                              i < Math.floor(skill.level / 20) 
+                                ? 'bg-primary' 
+                                : 'bg-muted/30'
+                            }`}
+                          />
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
               );
             })}
+          </div>
+          
+          {/* Additional Info Section */}
+          <div className="mt-16 text-center">
+            <Card className="max-w-4xl mx-auto glass bg-background/20 backdrop-blur-xl border-white/20">
+              <CardContent className="p-8">
+                <div className="grid md:grid-cols-3 gap-8">
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-primary mb-2">5+</div>
+                    <div className="text-sm text-muted-foreground">Années d'expérience</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-primary mb-2">50+</div>
+                    <div className="text-sm text-muted-foreground">Projets réalisés</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-primary mb-2">100%</div>
+                    <div className="text-sm text-muted-foreground">Satisfaction client</div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
