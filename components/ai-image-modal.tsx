@@ -52,17 +52,17 @@ export function AIImageModal({ image, images, isOpen, onClose, onImageChange }: 
   const hasPrevious = currentIndex > 0;
   const hasNext = currentIndex < images.length - 1;
 
-  const goToPrevious = () => {
+  const goToPrevious = useCallback(() => {
     if (hasPrevious) {
       onImageChange(images[currentIndex - 1].id);
     }
-  };
+  }, [hasPrevious, onImageChange, images, currentIndex]);
 
-  const goToNext = () => {
+  const goToNext = useCallback(() => {
     if (hasNext) {
       onImageChange(images[currentIndex + 1].id);
     }
-  };
+  }, [hasNext, onImageChange, images, currentIndex]);
 
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     if (e.key === 'ArrowLeft' && hasPrevious) {

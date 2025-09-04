@@ -8,10 +8,10 @@ export const translations = {
     },
     hero: {
       badge: "Expert en IA & Développement Web",
-      title: "Créateur d'expériences numériques innovantes",
-      description: "Spécialisé dans la génération d'images IA avec des prompts avancés et le développement d'applications web modernes. Je transforme vos idées en réalité numérique.",
+      title: "Créateur d&apos;expériences numériques innovantes",
+      description: "Spécialisé dans la génération d&apos;images IA avec des prompts avancés et le développement d&apos;applications web modernes. Je transforme vos idées en réalité numérique.",
       cta1: "Voir mes projets",
-      cta2: "Découvrir l'IA"
+      cta2: "Découvrir l&apos;IA"
     },
     skills: {
       title: "Expertise Technique",
@@ -76,10 +76,10 @@ export const translations = {
       generated: "Generated with"
     },
     contact: {
-      title: "Let's work together",
+      title: "Let&apos;s work together",
       description: "Ready to bring your next project to life? Contact me to discuss your needs.",
       contactTitle: "Contact me",
-      contactDescription: "Let's discuss your project and how I can help you",
+      contactDescription: "Let&apos;s discuss your project and how I can help you",
       startProject: "Start a project"
     },
     footer: {
