@@ -92,8 +92,8 @@ export function AIImageModal({ image, images, isOpen, onClose, onImageChange }: 
       />
       
       {/* Modal */}
-      <Card className="relative w-full max-w-4xl max-h-[90vh] overflow-hidden bg-background/20 backdrop-blur-xl border border-white/20 shadow-2xl">
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
+      <Card className="relative w-full max-w-4xl max-h-[90vh] flex flex-col bg-background/20 backdrop-blur-xl border border-white/20 shadow-2xl">
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4 flex-shrink-0">
           <div>
             <CardTitle className="text-2xl">{image.title}</CardTitle>
             <CardDescription className="text-base">
@@ -110,43 +110,49 @@ export function AIImageModal({ image, images, isOpen, onClose, onImageChange }: 
           </div>
         </CardHeader>
         
-        <CardContent className="space-y-6">
+        <CardContent className="space-y-6 overflow-y-auto flex-1 min-h-0 p-6 modal-scroll">
           {/* Image with Navigation */}
-          <div className="aspect-video rounded-lg overflow-hidden relative border border-white/10 bg-white/5 group">
+          <div className="rounded-lg overflow-hidden relative border border-white/10 bg-white/5 group">
             {image.image && image.image.trim().length > 0 ? (
-              <Image
-                src={image.image}
-                alt={image.title}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw"
-              />
+              <div className="flex justify-center p-4">
+                <div className="w-80 h-[28rem] relative">
+                  <Image
+                    src={image.image}
+                    alt={image.title}
+                    fill
+                    className="object-cover rounded-lg"
+                    sizes="(max-width: 768px) 80vw, (max-width: 1200px) 50vw, 40vw"
+                  />
+                </div>
+              </div>
             ) : (
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/30" />
+              <div className="aspect-[9/16] bg-gradient-to-br from-primary/20 to-secondary/30" />
             )}
             
             {/* Navigation Arrows */}
-            {hasPrevious && (
-              <Button
-                variant="ghost"
-                size="icon"
-                className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/20 hover:bg-black/40 text-white opacity-0 group-hover:opacity-100 transition-opacity"
-                onClick={goToPrevious}
-              >
-                <ChevronLeft className="w-6 h-6" />
-              </Button>
-            )}
-            
-            {hasNext && (
-              <Button
-                variant="ghost"
-                size="icon"
-                className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/20 hover:bg-black/40 text-white opacity-0 group-hover:opacity-100 transition-opacity"
-                onClick={goToNext}
-              >
-                <ChevronRight className="w-6 h-6" />
-              </Button>
-            )}
+            <div className="absolute inset-0 flex items-center justify-between p-4 pointer-events-none">
+              {hasPrevious && (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="bg-black/20 hover:bg-black/40 text-white opacity-0 group-hover:opacity-100 transition-opacity pointer-events-auto"
+                  onClick={goToPrevious}
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </Button>
+              )}
+              
+              {hasNext && (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="bg-black/20 hover:bg-black/40 text-white opacity-0 group-hover:opacity-100 transition-opacity pointer-events-auto"
+                  onClick={goToNext}
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </Button>
+              )}
+            </div>
           </div>
           
           {/* Prompt Section */}
@@ -173,8 +179,8 @@ export function AIImageModal({ image, images, isOpen, onClose, onImageChange }: 
               </Button>
             </div>
             
-            <div className="bg-muted/50 rounded-lg p-4 border">
-              <p className="text-sm leading-relaxed font-mono">
+            <div className="bg-muted/50 rounded-lg p-4 border max-h-60 overflow-y-auto card-scroll scroll-indicator">
+              <p className="text-sm leading-relaxed font-mono whitespace-pre-wrap">
                 {image.prompt}
               </p>
             </div>
