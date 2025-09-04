@@ -31,12 +31,56 @@ export default function Home() {
   const [showAllImages, setShowAllImages] = useState(false);
   const { t, language, changeLanguage } = useTranslations();
 
-  // Textes avec apostrophes échappées pour éviter les erreurs ESLint
-  const heroTitle = language === 'fr' ? "Créateur d'expériences numériques innovantes" : t("hero.title");
-  const heroDescription = language === 'fr' ? "Spécialisé dans la génération d'images IA avec des prompts avancés et le développement d'applications web modernes. Je transforme vos idées en réalité numérique." : t("hero.description");
-  const heroCta2 = language === 'fr' ? "Découvrir l'IA" : t("hero.cta2");
-  const contactTitle = language === 'en' ? "Let's work together" : t("contact.title");
-  const contactDescription = language === 'en' ? "Let's discuss your project and how I can help you" : t("contact.contactDescription");
+  // Textes avec apostrophes pour éviter les erreurs ESLint
+  const getHeroTitle = () => {
+    switch(language) {
+      case 'fr': return "Créateur d'expériences numériques innovantes";
+      case 'en': return "Creator of innovative digital experiences";
+      case 'es': return "Creador de experiencias digitales innovadoras";
+      case 'de': return "Schöpfer innovativer digitaler Erfahrungen";
+      default: return t("hero.title");
+    }
+  };
+
+  const getHeroDescription = () => {
+    switch(language) {
+      case 'fr': return "Spécialisé dans la génération d'images IA avec des prompts avancés et le développement d'applications web modernes. Je transforme vos idées en réalité numérique.";
+      case 'en': return "Specialized in AI image generation with advanced prompts and modern web application development. I transform your ideas into digital reality.";
+      case 'es': return "Especializado en generación de imágenes IA con prompts avanzados y desarrollo de aplicaciones web modernas. Transformo tus ideas en realidad digital.";
+      case 'de': return "Spezialisiert auf KI-Bildgenerierung mit fortgeschrittenen Prompts und moderner Webanwendungsentwicklung. Ich verwandle Ihre Ideen in digitale Realität.";
+      default: return t("hero.description");
+    }
+  };
+
+  const getHeroCta2 = () => {
+    switch(language) {
+      case 'fr': return "Découvrir l'IA";
+      case 'en': return "Discover AI";
+      case 'es': return "Descubrir IA";
+      case 'de': return "KI entdecken";
+      default: return t("hero.cta2");
+    }
+  };
+
+  const getContactTitle = () => {
+    switch(language) {
+      case 'en': return "Let's work together";
+      case 'fr': return "Travaillons ensemble";
+      case 'es': return "Trabajemos juntos";
+      case 'de': return "Lassen Sie uns zusammenarbeiten";
+      default: return t("contact.title");
+    }
+  };
+
+  const getContactDescription = () => {
+    switch(language) {
+      case 'en': return "Let's discuss your project and how I can help you";
+      case 'fr': return "Discutons de votre projet et de la façon dont je peux vous aider";
+      case 'es': return "Discutamos tu proyecto y cómo puedo ayudarte";
+      case 'de': return "Lassen Sie uns Ihr Projekt und wie ich Ihnen helfen kann besprechen";
+      default: return t("contact.contactDescription");
+    }
+  };
 
   const fallbackAiImages: Array<{id:number; image:string; prompt:string; title:string; model:string; featured:boolean}> = [];
 
@@ -154,11 +198,11 @@ export default function Home() {
             </div>
             
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6">
-              {heroTitle}
+              {getHeroTitle()}
             </h1>
             
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              {heroDescription}
+              {getHeroDescription()}
             </p>
 
             {/* Mimojie presenter removed until provided via admin */}
@@ -170,7 +214,7 @@ export default function Home() {
               </Button>
               <Button variant="outline" size="lg" className="group">
                 <Play className="mr-2 w-4 h-4" />
-                {t("hero.cta2")}
+                {getHeroCta2()}
               </Button>
             </div>
           </div>
@@ -354,7 +398,7 @@ export default function Home() {
       <section id="contact" className="py-24">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">{t("contact.title")}</h2>
+            <h2 className="text-4xl font-bold mb-4">{getContactTitle()}</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               {t("contact.description")}
             </p>
@@ -365,7 +409,7 @@ export default function Home() {
               <CardHeader className="text-center">
                 <CardTitle className="text-2xl">{t("contact.contactTitle")}</CardTitle>
                 <CardDescription>
-                  {t("contact.contactDescription")}
+                  {getContactDescription()}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
