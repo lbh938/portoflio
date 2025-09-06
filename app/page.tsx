@@ -488,11 +488,11 @@ export default function Home() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                   <Button variant="outline" className="h-12 justify-start text-sm">
                     <Mail className="w-4 h-4 mr-3" />
-                    contact@portfolio.com
+                    lbhstorewrld@outlook.fr
                   </Button>
                   <Button variant="outline" className="h-12 justify-start text-sm">
                     <Linkedin className="w-4 h-4 mr-3" />
-                    LinkedIn
+                    
                   </Button>
                 </div>
                 <div className="text-center">
