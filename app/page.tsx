@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { CookieConsent } from "@/components/cookie-consent";
@@ -17,8 +17,6 @@ import {
   ArrowRight,
   Globe,
   Sparkles,
-  Layers,
-  Smartphone,
   Menu,
   X,
   Zap,
@@ -374,7 +372,7 @@ export default function Home() {
                       />
                       <div className="image-fallback hidden aspect-video bg-gradient-to-br from-primary/20 via-secondary/30 to-accent/20 items-center justify-center absolute inset-0">
                         <Globe className="w-16 h-16 text-muted-foreground/50" />
-                        <p className="absolute bottom-4 text-xs text-muted-foreground">Chargement de l'aperçu...</p>
+                        <p className="absolute bottom-4 text-xs text-muted-foreground">Chargement de l&apos;aperçu...</p>
                       </div>
                       {/* Overlay au survol pour indiquer qu'on peut cliquer pour voir en grand */}
                       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/20">

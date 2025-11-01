@@ -37,7 +37,7 @@ export async function GET(request: NextRequest) {
           });
         }
       }
-    } catch (e) {
+    } catch {
       console.log("ScreenshotAPI failed, trying Microlink");
     }
 
@@ -66,7 +66,7 @@ export async function GET(request: NextRequest) {
           }
         }
       }
-    } catch (e) {
+    } catch {
       console.log("Microlink failed, trying screenshot.rocks");
     }
 
