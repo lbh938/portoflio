@@ -107,7 +107,6 @@ const featuredWebProjects = [
 
 export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [selectedPreview, setSelectedPreview] = useState<{ url: string; title: string } | null>(null);
   const { t, language, changeLanguage } = useTranslations();
 
   const getHeroTitle = () => {
@@ -349,9 +348,11 @@ export default function Home() {
               >
                 <div className="relative overflow-hidden rounded-t-xl border-b border-white/10 bg-gradient-to-br from-white/5 to-white/0">
                   {hasImage ? (
-                    <div 
-                      className="aspect-video relative group/image cursor-pointer"
-                      onClick={() => setSelectedPreview({ url: project.liveUrl, title: project.title })}
+                    <a 
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="aspect-video relative group/image cursor-pointer block"
                     >
                       {/* Screenshot du site affiché directement */}
                       <Image
@@ -374,12 +375,12 @@ export default function Home() {
                         <Globe className="w-16 h-16 text-muted-foreground/50" />
                         <p className="absolute bottom-4 text-xs text-muted-foreground">Chargement de l&apos;aperçu...</p>
                       </div>
-                      {/* Overlay au survol pour indiquer qu'on peut cliquer pour voir en grand */}
+                      {/* Overlay au survol pour indiquer qu'on peut cliquer */}
                       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/20">
                         <div className="glass-premium bg-white/30 backdrop-blur-xl border-white/40 px-4 py-2 rounded-lg shadow-lg">
                           <p className="text-white font-medium text-sm flex items-center gap-2">
                             <ExternalLink className="w-4 h-4" />
-                            Voir en plein écran
+                            Visiter le site
                           </p>
                         </div>
                       </div>
@@ -387,14 +388,16 @@ export default function Home() {
                       <div className="absolute top-2 right-2 glass-premium bg-black/40 backdrop-blur-md border-white/20 px-2 py-1 rounded text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity">
                         📸 Aperçu live
                       </div>
-                    </div>
+                    </a>
                   ) : (
-                    <div 
-                      className="aspect-video bg-gradient-to-br from-primary/20 via-secondary/30 to-accent/20 flex items-center justify-center cursor-pointer hover:opacity-80 transition-opacity"
-                      onClick={() => setSelectedPreview({ url: project.liveUrl, title: project.title })}
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="aspect-video bg-gradient-to-br from-primary/20 via-secondary/30 to-accent/20 flex items-center justify-center cursor-pointer hover:opacity-80 transition-opacity block"
                     >
                       <Globe className="w-16 h-16 text-muted-foreground/50" />
-                    </div>
+                    </a>
                   )}
                 </div>
                 <CardHeader className="p-6 sm:p-8">
@@ -567,54 +570,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-
-      {/* Modal Preview */}
-      {selectedPreview && (
-        <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
-          onClick={() => setSelectedPreview(null)}
-        >
-          <div 
-            className="relative w-full max-w-7xl h-[90vh] glass-premium bg-background/95 backdrop-blur-2xl border-white/20 rounded-2xl overflow-hidden shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Header */}
-            <div className="flex items-center justify-between p-4 border-b border-white/10">
-              <h3 className="text-xl font-semibold">{selectedPreview.title}</h3>
-              <div className="flex items-center gap-2">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => window.open(selectedPreview.url, '_blank')}
-                  className="hover:bg-white/10"
-                >
-                  <ExternalLink className="w-4 h-4 mr-2" />
-                  Ouvrir dans un nouvel onglet
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setSelectedPreview(null)}
-                  className="hover:bg-white/10"
-                >
-                  <X className="w-5 h-5" />
-                </Button>
-              </div>
-            </div>
-            
-            {/* Iframe Preview */}
-            <div className="relative w-full h-[calc(90vh-80px)]">
-              <iframe
-                src={selectedPreview.url}
-                className="w-full h-full border-0"
-                title={`Preview de ${selectedPreview.title}`}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Cookie Consent */}
       <CookieConsent 
